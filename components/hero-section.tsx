@@ -14,7 +14,7 @@ export function HeroSection({
   demoVideoSrc = "/video-placeholder.png",
   demoVideoAlt = "Demo video placeholder",
 }: HeroSectionProps) {
-  // Keyboard handler for accessible button activation via keyboard if needed
+  // Keyboard handler for accessible button activation via keyboard
   const onKeyDownHandler = (event: KeyboardEvent<HTMLAnchorElement>) => {
     if (event.key === " " || event.key === "Enter") {
       event.currentTarget.click()
@@ -48,7 +48,7 @@ export function HeroSection({
             "select-text max-w-lg"
           )}
         >
-          Unleash the Power of AI for Your Business
+          Unlock Your AI Potential
         </h1>
         <p className="mt-4 text-base sm:text-lg md:text-xl text-blue-100 dark:text-blue-200 max-w-md leading-relaxed">
           TaskFlow AI empowers your remote team to automate workflow management,
@@ -92,6 +92,8 @@ export function HeroSection({
       <div
         className="relative z-10 w-full aspect-video rounded-lg overflow-hidden shadow-lg bg-muted"
         aria-label="Demo video placeholder"
+        role="img"
+        aria-describedby="demo-video-desc"
       >
         <Image
           src={demoVideoSrc}
@@ -104,6 +106,10 @@ export function HeroSection({
           quality={80}
           placeholder="empty"
         />
+        {/* Visually hidden description for screen readers */}
+        <span id="demo-video-desc" className="sr-only">
+          Demo video placeholder showing TaskFlow AI interface
+        </span>
       </div>
 
       {/* Global style for animated gradient background */}
