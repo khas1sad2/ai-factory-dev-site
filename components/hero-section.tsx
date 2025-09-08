@@ -3,6 +3,7 @@
 import * as React from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
+import { KeyboardEvent } from "react"
 
 type HeroSectionProps = {
   demoVideoSrc?: string
@@ -13,17 +14,25 @@ export function HeroSection({
   demoVideoSrc = "/video-placeholder.png",
   demoVideoAlt = "Demo video placeholder",
 }: HeroSectionProps) {
+  // Keyboard handler for accessible button activation via keyboard if needed
+  const onKeyDownHandler = (event: KeyboardEvent<HTMLAnchorElement>) => {
+    if (event.key === " " || event.key === "Enter") {
+      event.currentTarget.click()
+      event.preventDefault()
+    }
+  }
+
   return (
     <section
       aria-label="Hero section introducing TaskFlow AI"
-      className="relative max-w-7xl w-full mx-auto px-4 sm:px-6 md:px-8 py-16 md:py-20 grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+      className="relative max-w-7xl w-full mx-auto px-4 sm:px-6 md:px-8 pt-20 pb-24 md:pt-28 md:pb-32 grid grid-cols-1 md:grid-cols-2 gap-10 items-center"
     >
       {/* Animated Gradient Background */}
       <div
         aria-hidden="true"
         className={cn(
           "absolute inset-0 rounded-md pointer-events-none",
-          "bg-gradient-to-br from-blue-800 via-purple-900 to-blue-900 dark:from-blue-900 dark:via-purple-950 dark:to-blue-950",
+          "bg-gradient-to-br from-blue-900 via-purple-900 to-blue-900 dark:from-blue-950 dark:via-purple-950 dark:to-blue-950",
           "animate-gradient-background"
         )}
         style={{ zIndex: 0, willChange: "background-position" }}
@@ -32,24 +41,25 @@ export function HeroSection({
       {/* Text Content */}
       <div className="relative z-10 flex flex-col items-start text-left">
         <h1
-          className={cn(
-            "text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.2] sm:leading-[1.3]",
-            "text-blue-400 dark:text-blue-300",
-            "select-text",
-            "md:max-w-lg"
-          )}
           tabIndex={-1}
+          className={cn(
+            "text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.15] sm:leading-[1.2] md:leading-[1.25]",
+            "text-white dark:text-blue-300",
+            "select-text max-w-lg"
+          )}
         >
-          AI-Powered Solutions for Your Business Growth
+          Unleash the Power of AI for Your Business
         </h1>
-        <p className="mt-4 text-lg sm:text-xl text-muted-foreground max-w-lg">
+        <p className="mt-4 text-base sm:text-lg md:text-xl text-blue-100 dark:text-blue-200 max-w-md leading-relaxed">
           TaskFlow AI empowers your remote team to automate workflow management,
           enhance collaboration, and boost productivity through intelligent AI automation.
         </p>
-        <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 w-full max-w-xs sm:max-w-none">
+        <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 w-full max-w-xs sm:max-w-none">
+          {/* Primary CTA */}
           <a
             href="/signup"
             aria-label="Get Started with TaskFlow AI free trial"
+            onKeyDown={onKeyDownHandler}
             className={cn(
               "w-full sm:w-auto rounded-md bg-blue-600 text-white font-semibold px-6 py-3 shadow-md text-center",
               "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-400 focus-visible:ring-offset-2",
@@ -59,9 +69,12 @@ export function HeroSection({
           >
             Get Started
           </a>
+
+          {/* Secondary CTA */}
           <a
             href="#features"
             aria-label="Learn more about TaskFlow AI features"
+            onKeyDown={onKeyDownHandler}
             className={cn(
               "w-full sm:w-auto rounded-md border border-blue-500 text-blue-400 hover:text-blue-300 hover:border-blue-400",
               "dark:text-blue-300 dark:hover:text-blue-200 dark:hover:border-blue-300",
@@ -89,6 +102,7 @@ export function HeroSection({
           priority={false}
           draggable={false}
           quality={80}
+          placeholder="empty"
         />
       </div>
 
