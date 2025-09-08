@@ -1,103 +1,191 @@
-import Image from "next/image";
+import * as React from "react"
+import { Header } from "@/components/header"
+import Image from "next/image"
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <div className="bg-background text-foreground min-h-screen flex flex-col">
+      <Header />
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-grow container mx-auto px-4 sm:px-6 md:px-8 py-12 flex flex-col items-center justify-center text-center gap-12"
+      >
+        {/* Hero Section */}
+        <section
+          aria-label="Hero section introducing TaskFlow AI"
+          className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+        >
+          <div>
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight text-blue-500 dark:text-blue-400">
+              Automate Your Remote Team&apos;s Workflow with AI
+            </h1>
+            <p className="mt-4 text-lg sm:text-xl text-muted-foreground max-w-md mx-auto md:mx-0">
+              TaskFlow AI helps remote teams streamline project management, boost
+              collaboration, and analyze productivity through powerful AI
+              automation.
+            </p>
+            <a
+              href="#signup"
+              className="mt-8 inline-block rounded-md bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold px-6 py-3 shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-400 transition"
+            >
+              Start Free Trial
+            </a>
+          </div>
+          <div className="relative w-full aspect-video bg-muted rounded-lg overflow-hidden shadow-lg">
+            {/* Placeholder for demo video */}
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/video-placeholder.png"
+              alt="Demo video placeholder"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover object-center"
+              priority={false}
+              draggable={false}
             />
-            Deploy now
-          </a>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section
+          id="features"
+          aria-label="Key features of TaskFlow AI"
+          className="max-w-5xl w-full grid grid-cols-1 sm:grid-cols-3 gap-10 text-left"
+        >
+          <article className="flex flex-col items-start gap-4">
+            <h2 className="text-2xl font-semibold text-blue-400 dark:text-blue-500">
+              AI Automation
+            </h2>
+            <p className="text-muted-foreground text-base leading-relaxed">
+              Automate repetitive tasks and workflows to free up your team&apos;s
+              time and focus on what matters.
+            </p>
+          </article>
+          <article className="flex flex-col items-start gap-4">
+            <h2 className="text-2xl font-semibold text-blue-400 dark:text-blue-500">
+              Team Collaboration
+            </h2>
+            <p className="text-muted-foreground text-base leading-relaxed">
+              Foster seamless communication and coordination across your remote
+              teams with real-time updates and shared task boards.
+            </p>
+          </article>
+          <article className="flex flex-col items-start gap-4">
+            <h2 className="text-2xl font-semibold text-blue-400 dark:text-blue-500">
+              Analytics & Insights
+            </h2>
+            <p className="text-muted-foreground text-base leading-relaxed">
+              Gain actionable insights from data-driven analytics to optimize
+              productivity and project outcomes.
+            </p>
+          </article>
+        </section>
+
+        {/* Testimonials Section */}
+        <section
+          id="testimonials"
+          aria-label="Customer testimonials"
+          className="max-w-4xl w-full grid gap-8"
+        >
+          <h2 className="text-3xl font-bold text-center text-blue-400 dark:text-blue-500">
+            Trusted by Remote Teams Worldwide
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <blockquote className="bg-muted rounded-lg p-6 shadow-lg">
+              <p className="text-lg italic text-muted-foreground leading-relaxed">
+                &quot;TaskFlow AI transformed how my team works remotely. The AI
+                automation saved us countless hours every week.&quot;
+              </p>
+              <footer className="mt-4 text-sm font-semibold text-blue-500">
+                - Sophia Lee, Project Manager
+              </footer>
+            </blockquote>
+            <blockquote className="bg-muted rounded-lg p-6 shadow-lg">
+              <p className="text-lg italic text-muted-foreground leading-relaxed">
+                &quot;The collaboration tools are intuitive and keep everyone on
+                the same page. Highly recommend TaskFlow AI!&quot;
+              </p>
+              <footer className="mt-4 text-sm font-semibold text-blue-500">
+                - Carlos Ramirez, Team Lead
+              </footer>
+            </blockquote>
+          </div>
+        </section>
+
+        {/* Pricing Section */}
+        <section
+          id="pricing"
+          aria-label="Pricing plans"
+          className="max-w-5xl w-full grid grid-cols-1 sm:grid-cols-3 gap-8"
+        >
+          <article className="border border-border rounded-lg p-6 bg-card shadow-sm flex flex-col">
+            <h3 className="text-xl font-semibold text-blue-400 dark:text-blue-500 mb-2">
+              Free
+            </h3>
+            <p className="text-muted-foreground flex-grow">
+              Basic features, limited AI automation, ideal for small teams.
+            </p>
+            <p className="text-3xl font-bold mt-4 mb-6">$0</p>
+            <a
+              href="#signup"
+              className="mt-auto rounded-md bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold px-4 py-2 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-400 transition"
+            >
+              Get Started
+            </a>
+          </article>
+          <article className="border border-border rounded-lg p-6 bg-card shadow-sm flex flex-col">
+            <h3 className="text-xl font-semibold text-blue-400 dark:text-blue-500 mb-2">
+              Pro
+            </h3>
+            <p className="text-muted-foreground flex-grow">
+              Full AI automation, team collaboration, and analytics.
+            </p>
+            <p className="text-3xl font-bold mt-4 mb-6">$29/mo</p>
+            <a
+              href="#signup"
+              className="mt-auto rounded-md bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold px-4 py-2 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-400 transition"
+            >
+              Try Pro
+            </a>
+          </article>
+          <article className="border border-border rounded-lg p-6 bg-card shadow-sm flex flex-col">
+            <h3 className="text-xl font-semibold text-blue-400 dark:text-blue-500 mb-2">
+              Enterprise
+            </h3>
+            <p className="text-muted-foreground flex-grow">
+              Custom solutions, priority support, and advanced integrations.
+            </p>
+            <p className="text-3xl font-bold mt-4 mb-6">Contact Us</p>
+            <a
+              href="#signup"
+              className="mt-auto rounded-md bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold px-4 py-2 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-400 transition"
+            >
+              Contact Sales
+            </a>
+          </article>
+        </section>
+
+        {/* Call-to-Action Section */}
+        <section
+          id="signup"
+          aria-label="Free trial signup call to action"
+          className="max-w-3xl w-full bg-blue-900 dark:bg-blue-800 rounded-lg p-8 text-center shadow-lg"
+        >
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Get Started with TaskFlow AI Today
+          </h2>
+          <p className="text-blue-200 mb-6">
+            Sign up now for a free trial and empower your remote team with AI-driven
+            productivity.
+          </p>
           <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/signup"
+            className="inline-block rounded-md bg-white text-blue-900 font-semibold px-8 py-3 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white transition"
           >
-            Read our docs
+            Start Free Trial
           </a>
-        </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
-  );
+  )
 }
