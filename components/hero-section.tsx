@@ -18,39 +18,42 @@ export function HeroSection({
       aria-label="Hero section introducing TaskFlow AI"
       className="relative max-w-7xl w-full mx-auto px-4 sm:px-6 md:px-8 py-16 md:py-20 grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
     >
-      {/* Background overlay for contrast */}
+      {/* Animated Gradient Background */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70 dark:from-black/80 dark:via-black/70 dark:to-black/80 pointer-events-none rounded-md"
-        style={{ zIndex: 0 }}
+        className={cn(
+          "absolute inset-0 rounded-md pointer-events-none",
+          "bg-gradient-to-br from-blue-800 via-purple-900 to-blue-900 dark:from-blue-900 dark:via-purple-950 dark:to-blue-950",
+          "animate-gradient-background"
+        )}
+        style={{ zIndex: 0, willChange: "background-position" }}
       />
-      <div
-        className="relative z-10 flex flex-col items-start text-left"
-      >
+
+      {/* Text Content */}
+      <div className="relative z-10 flex flex-col items-start text-left">
         <h1
           className={cn(
             "text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.2] sm:leading-[1.3]",
             "text-blue-400 dark:text-blue-300",
             "select-text",
-            "md:max-w-lg",
-            "letter-spacing-[0.02em]"
+            "md:max-w-lg"
           )}
-          style={{ letterSpacing: "0.02em" }}
+          tabIndex={-1}
         >
-          Innovate. Automate. Accelerate.
+          AI-Powered Solutions for Your Business Growth
         </h1>
         <p className="mt-4 text-lg sm:text-xl text-muted-foreground max-w-lg">
-          TaskFlow AI empowers your remote team to streamline workflows, boost
-          collaboration, and unlock productivity with intelligent automation.
+          TaskFlow AI empowers your remote team to automate workflow management,
+          enhance collaboration, and boost productivity through intelligent AI automation.
         </p>
         <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 w-full max-w-xs sm:max-w-none">
           <a
-            href="#signup"
+            href="/signup"
             aria-label="Get Started with TaskFlow AI free trial"
             className={cn(
-              "w-full sm:w-auto rounded-md bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600",
-              "text-white font-semibold px-6 py-3 shadow-md text-center",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-400",
+              "w-full sm:w-auto rounded-md bg-blue-600 text-white font-semibold px-6 py-3 shadow-md text-center",
+              "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-400 focus-visible:ring-offset-2",
+              "hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600",
               "transition duration-200 ease-in-out select-none"
             )}
           >
@@ -60,9 +63,10 @@ export function HeroSection({
             href="#features"
             aria-label="Learn more about TaskFlow AI features"
             className={cn(
-              "w-full sm:w-auto rounded-md border border-blue-500 text-blue-400 hover:text-blue-300 hover:border-blue-400 dark:text-blue-300 dark:hover:text-blue-200 dark:hover:border-blue-300",
+              "w-full sm:w-auto rounded-md border border-blue-500 text-blue-400 hover:text-blue-300 hover:border-blue-400",
+              "dark:text-blue-300 dark:hover:text-blue-200 dark:hover:border-blue-300",
               "font-semibold px-6 py-3 text-center",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-400",
+              "focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-400 focus-visible:ring-offset-2",
               "transition duration-200 ease-in-out select-none"
             )}
           >
@@ -70,6 +74,8 @@ export function HeroSection({
           </a>
         </div>
       </div>
+
+      {/* Demo Video Placeholder */}
       <div
         className="relative z-10 w-full aspect-video rounded-lg overflow-hidden shadow-lg bg-muted"
         aria-label="Demo video placeholder"
@@ -85,6 +91,26 @@ export function HeroSection({
           quality={80}
         />
       </div>
+
+      {/* Global style for animated gradient background */}
+      <style>{`
+        @keyframes gradientShift {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        .animate-gradient-background {
+          background-size: 200% 200%;
+          animation: gradientShift 15s ease infinite;
+          will-change: background-position;
+        }
+      `}</style>
     </section>
   )
 }
