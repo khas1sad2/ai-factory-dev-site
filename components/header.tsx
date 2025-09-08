@@ -20,7 +20,7 @@ const navLinks: NavLink[] = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
-  // Close mobile menu on navigation or window resize (optional enhancement)
+  // Close mobile menu on window resize to desktop breakpoint
   React.useEffect(() => {
     function handleResize() {
       if (window.innerWidth >= 768) {
@@ -31,11 +31,22 @@ export function Header() {
     return () => window.removeEventListener("resize", handleResize)
   }, [])
 
+  // Close mobile menu on Escape key for accessibility
+  React.useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape" && mobileMenuOpen) {
+        setMobileMenuOpen(false)
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [mobileMenuOpen])
+
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border shadow-sm",
-        "dark:bg-background/95"
+        "fixed inset-x-0 top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border shadow-sm dark:bg-background/95",
+        "transition-colors duration-300"
       )}
       role="banner"
     >
@@ -45,7 +56,7 @@ export function Header() {
           <Link
             href="/"
             aria-label="TaskFlow AI - Home"
-            className="flex items-center gap-2 text-blue-500 hover:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 font-semibold text-lg sm:text-xl"
+            className="flex items-center gap-2 text-blue-500 hover:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 font-semibold text-lg sm:text-xl leading-none"
           >
             <svg
               aria-hidden="true"
@@ -54,7 +65,9 @@ export function Header() {
               viewBox="0 0 48 48"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="text-blue-500"
+              className="text-blue-500 flex-shrink-0"
+              role="img"
+              focusable="false"
             >
               {/* Simple AI chip style icon */}
               <rect
@@ -81,22 +94,26 @@ export function Header() {
               />
             </svg>
             <span className="sr-only">TaskFlow AI</span>
-            <span className="hidden sm:inline">TaskFlow AI</span>
+            <span className="hidden sm:inline leading-tight select-none">
+              TaskFlow AI
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
           <nav
-            aria-label="Primary Navigation"
+            aria-label="Primary"
             className="hidden md:flex md:space-x-8"
           >
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="relative inline-block rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className={cn(
+                  "relative inline-block rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 leading-snug transition-colors duration-150",
+                )}
               >
                 {label}
-                <span className="absolute left-0 -bottom-1 h-0.5 w-full bg-blue-500 scale-x-0 transition-transform hover:scale-x-100" />
+                <span className="absolute left-0 -bottom-1 h-0.5 w-full bg-blue-500 scale-x-0 transition-transform duration-200 ease-in-out hover:scale-x-100" />
               </Link>
             ))}
           </nav>
@@ -106,7 +123,8 @@ export function Header() {
             type="button"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-controls="mobile-menu"
+            onClick={() => setMobileMenuOpen((open) => !open)}
             className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:hidden"
           >
             {mobileMenuOpen ? (
@@ -135,7 +153,7 @@ export function Header() {
               <Link
                 href={href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block rounded-md px-3 py-2 text-lg font-semibold text-muted-foreground hover:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="block rounded-md px-3 py-2 text-lg font-semibold text-muted-foreground hover:text-blue-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 leading-snug"
               >
                 {label}
               </Link>
